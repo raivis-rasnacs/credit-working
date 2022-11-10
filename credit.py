@@ -34,7 +34,6 @@ def sum_digits(card_number, to_multiply = False):
     for x in range(len(card_number) + (multiplier * -1), -1, -2):
         for digit in str(int(card_number[x]) * multiplier):
             digits.append(digit)
-    print(digits)
     for digit in digits:
         sum_of_digits += int(digit)
     return sum_of_digits
