@@ -22,29 +22,20 @@ def check_type_of_card(card_number):
     else:
         return "INVALID"
 
-
 """
-Sums digits starting from second-to-last
+Sums digits
+starting from the last one if multiplying is needed
+else starting from second-to-last if multiplying is not needed
 """
-def sum_digits(card_number):
-    sum_of_digits = 0
-    digits = str()
-    for x in range(len(card_number) - 2, -1, -2):
-        digits += str(int(card_number[x]) * 2)
+def sum_digits(card_number, to_multiply = False):
+    multiplier = 2 if to_multiply is True else 1
+    sum_of_digits = int()
+    digits = list()
+    for x in range(len(card_number) + (multiplier * -1), -1, -2):
+        for digit in str(int(card_number[x]) * multiplier):
+            digits.append(digit)
+    print(digits)
     for digit in digits:
-        sum_of_digits += int(digit)
-    return sum_of_digits
-
-
-"""
-Sums digits starting from the last one
-"""
-def sum_unmultiplied_digits(card_number):
-    sum_of_digits = 0
-    unmultiplied_digits = str()
-    for x in range(len(card_number) - 1, -1, -2):
-        unmultiplied_digits += str(int(card_number[x]))
-    for digit in unmultiplied_digits:
         sum_of_digits += int(digit)
     return sum_of_digits
 
@@ -53,7 +44,8 @@ def sum_unmultiplied_digits(card_number):
 card_number = input("Card number: ")
 
 # Checksum calculations
-total_sum = sum_digits(card_number) + sum_unmultiplied_digits(card_number)
+total_sum = sum_digits(card_number, to_multiply = True) + sum_digits(card_number)
+print(total_sum)
 
 if total_sum % 10 == 0:
 
