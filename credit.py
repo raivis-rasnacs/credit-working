@@ -1,7 +1,6 @@
-card_number = input("Number: ")
-
-
-# Checks type of card
+"""
+Checks type of card
+"""
 def check_type_of_card(card_number):
 
     # Gets length of card number
@@ -24,19 +23,22 @@ def check_type_of_card(card_number):
         return "INVALID"
 
 
-# Sums digits starting from second-to-last
+"""
+Sums digits starting from second-to-last
+"""
 def sum_digits(card_number):
     sum_of_digits = 0
     digits = str()
     for x in range(len(card_number) - 2, -1, -2):
         digits += str(int(card_number[x]) * 2)
-
     for digit in digits:
         sum_of_digits += int(digit)
     return sum_of_digits
 
 
-# Sums digitis starting from the last one
+"""
+Sums digits starting from the last one
+"""
 def sum_unmultiplied_digits(card_number):
     sum_of_digits = 0
     unmultiplied_digits = str()
@@ -47,9 +49,19 @@ def sum_unmultiplied_digits(card_number):
     return sum_of_digits
 
 
-# Final calculations
-card_type = check_type_of_card(card_number)
-total_sum = sum_digits(card_number)+sum_unmultiplied_digits(card_number)
+# Asks for input
+card_number = input("Card number: ")
 
-# Outputs result
-print(card_type)
+# Checksum calculations
+total_sum = sum_digits(card_number) + sum_unmultiplied_digits(card_number)
+
+if total_sum % 10 == 0:
+
+    # Checks for type of card
+    card_type = check_type_of_card(card_number)
+
+    # Outputs result
+    print(card_type)
+
+else:
+    print("INVALID")
