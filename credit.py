@@ -19,8 +19,7 @@ def check_type_of_card(card_number):
         return "MASTERCARD"
     elif length in VISA_lengths and str(card_number[:1]) in VISA_nums:
         return "VISA"
-    else:
-        return "INVALID"
+    return "INVALID"
 
 """
 Sums digits
@@ -30,12 +29,10 @@ else starting from second-to-last if multiplying is not needed
 def sum_digits(card_number, to_multiply = False):
     multiplier = 2 if to_multiply is True else 1
     sum_of_digits = int()
-    digits = list()
-    for x in range(len(card_number) + (multiplier * -1), -1, -2):
-        for digit in str(int(card_number[x]) * multiplier):
-            digits.append(digit)
-    for digit in digits:
-        sum_of_digits += int(digit)
+    numbers = [int(digit)*multiplier for digit in card_number[multiplier * -1::-2]]
+    for number in numbers:
+        for digit in str(number):
+            sum_of_digits += int(digit)
     return sum_of_digits
 
 
@@ -47,12 +44,9 @@ total_sum = sum_digits(card_number, to_multiply = True) + sum_digits(card_number
 print(total_sum)
 
 if total_sum % 10 == 0:
-
     # Checks for type of card
     card_type = check_type_of_card(card_number)
-
     # Outputs result
     print(card_type)
-
 else:
     print("INVALID")
